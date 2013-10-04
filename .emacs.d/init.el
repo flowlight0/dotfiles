@@ -10,8 +10,9 @@
 (setq frame-title-format "%f")
 
 ;; タブ関連
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
+(setq-default c-basic-offset 4     
+              tab-width 4          
+              indent-tabs-mode nil)  
 
 ;; 対応するカッコの強調表示
 (setq show-paren-delay 0)
@@ -44,6 +45,7 @@
 ;; c, c++等のフック
 (add-hook 'c-mode-common-hook
           '(lambda ()
+             (setq tab-width 4)
              (c-toggle-hungry-state t)
              (c-toggle-electric-state t)
              ))
@@ -70,6 +72,9 @@
 (global-set-key (kbd "C-c t") '(lambda ()
                                  (interactive)
                                  (shell)))
+
+;; 改行と同時にインデント
+(global-set-key "\C-m" 'newline-and-indent)
 
 ;; Anything
 (when (require 'anything nil t)
