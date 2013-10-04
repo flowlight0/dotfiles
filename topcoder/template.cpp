@@ -1,0 +1,48 @@
+#include <algorithm>
+#include <bitset>
+#include <cassert>
+#include <cctype>
+#include <complex>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <cstring>
+#include <ctime>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <limits>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <stack>
+#include <sstream>
+#include <tuple>
+#include <typeinfo>
+#include <unordered_set>
+#include <unordered_map>
+#include <vector>
+using namespace std;
+
+#define REP2(i, m, n) for(int i = (int)(m); i < (int)(n); i++)
+#define REP(i, n) REP2(i, 0, n)
+#define ALL(c) (c).begin(), (c).end()
+#define PB(e) push_back(e)
+#define FOREACH(i, c) for(auto i = (c).begin(); i != (c).end(); ++i)
+#define MP(a, b) make_pair(a, b)
+#define BIT(n, m) (((n) >> (m)) & 1)
+
+typedef long long ll;
+ 
+class ${ClassName} {
+    public:
+    ${Method.ReturnType} ${Method.Name}(${Method.Params}) {
+        return ${Method.ReturnType;ZeroValue};
+    }
+};
+ 
+${CutBegin}
+${<TestCode}
+${CutEnd}
+
