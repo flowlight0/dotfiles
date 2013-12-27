@@ -26,6 +26,7 @@
 using namespace std;
 
 #define REP2(i, m, n) for(int i = (int)(m); i < (int)(n); i++)
+#define REPD(i, n) for(int i = (int)(n) - 1; i >= 0; i--)
 #define REP(i, n) REP2(i, 0, n)
 #define ALL(c) (c).begin(), (c).end()
 #define PB(e) push_back(e)
@@ -45,4 +46,3 @@ class ${ClassName} {
 ${CutBegin}
 ${<TestCode}
 ${CutEnd}
-

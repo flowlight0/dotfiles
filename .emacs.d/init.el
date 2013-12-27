@@ -3,9 +3,18 @@
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
 
+;; package.el
+(when (require 'package nil t)
+  (add-to-list 'package-archives
+               '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (add-to-list 'package-archives
+               '("melpa" . "http://melpa.milkbox.net/packages/"))
+  (add-to-list 'package-archives
+               '("ELPA" . "http://tromey.com/elpa/"))
+  (package-initialize))
+
 ;; カラム番号を表示
 (column-number-mode t)
-
 ;; タイトルバーにファイルのフルパスを表示
 (setq frame-title-format "%f")
 
@@ -76,33 +85,159 @@
 ;; 改行と同時にインデント
 (global-set-key "\C-m" 'newline-and-indent)
 
-;; Anything
-(when (require 'anything nil t)
-  (setq
-   anything-idle-delay 0.3
-   anything-candidate-number 100
-   anything-quick-update t
-   anything-enable-shortcuts 'alphabet)
-  
-  (when (require 'anything-config nil t)
-    (setq anything-su-or-sudo "sudo")
-    (add-to-list 'anything-sources 'anything-c-source-emacs-commands))
-  
-  (require 'anything-match-plugin nil t)
-  
-  (when (require 'anything-complete nil t)
-    (anything-lisp-complete-symbol-set-timer 150))
-
-  (require 'anything-show-completion nil t))
-   
-(define-key global-map (kbd "C-;") 'anything)
-
-;; wdired
-(define-key dired-mode-map "r" 'wdired-change-to-wdired-mode)
 
 ;; eggの設定
 (when (executable-find "git")
   (when (require 'egg nil t)
     (define-key global-map (kbd "C-x v s") 'egg-status)
     (define-key global-map (kbd "C-x v l") 'egg-log)
+    (define-key global-map (kbd "C-x v d") 'egg-diff)
     ))
+
+
+;;
+;;; org-mode
+;;; http://d.hatena.ne.jp/tamura70/20100203/org
+;; org-modeの初期化
+(require 'org-install)
+;; キーバインドの設定
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(define-key global-map "\C-cr" 'org-remember)
+;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;; org-modeでの強調表示を可能にする
+(add-hook 'org-mode-hook 'turn-on-font-lock)
+;; 見出しの余分な*を消す
+(setq org-hide-leading-stars t)
+;; org-default-notes-fileのディレクトリ
+(setq org-directory "~/org/")
+;; org-default-notes-fileのファイル名
+(setq org-default-notes-file "notes.org")
+  
+(setq org-tag-alist
+  '(("@OFFICE" . ?o) ("@HOME" . ?h) ("SHOPPING" . ?s)
+    ("MAIL" . ?m) ("PROJECT" . ?p)))
+
+
+(when (require 'flymake nil t)
+  (defun flymake-cc-no-makefile-init ()
+    (let* ((temp-file   (flymake-init-create-temp-buffer-copy
+                         'flymake-create-temp-inplace))
+           (local-file  (file-relative-name
+                         temp-file
+                         (file-name-directory buffer-file-name))))
+      (message "There is no Makfile")
+      (list "g++" (list "-Wall" "-std=c++11" "-Wextra" "-fsyntax-only" local-file))))
+  
+  (defun flymake-cc-init ()
+    (if (or (file-exists-p "Makefile" ) (file-exists-p "../Makefile"))
+        (flymake-simple-make-init)
+      (flymake-cc-no-makefile-init)))
+  
+  (push '("\\.[ch]pp$" flymake-cc-init) flymake-allowed-file-name-masks)
+  
+  (add-hook 'c++-mode-hook
+            '(lambda ()
+               (flymake-mode t))))
+
+(require 'yasnippet)
+(yas--initialize)
+(yas-global-mode t)
+(yas/load-directory "~/.emacs.d/snippets")
+
+(when (require 'helm-config nil t)
+  ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  (helm-mode t)
+  (require 'helm-c-yasnippet)
+  (global-set-key (kbd "C-c y") 'helm-c-yas-complete)
+  )
+
+
+;; yatex-mode
+
+(setq auto-mode-alist
+      (cons (cons "\\.tex$" 'yatex-mode) auto-mode-alist))
+(autoload 'yatex-mode "yatex" "Yet Another LaTeX mode" t)
+(setq YaTeX-kanji-code 4)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; TypeRex configuration ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Loading TypeRex mode for OCaml files
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
+(add-to-list 'auto-mode-alist '("\\.ml[iylp]?" . typerex-mode))
+(add-to-list 'interpreter-mode-alist '("ocamlrun" . typerex-mode))
+(add-to-list 'interpreter-mode-alist '("ocaml" . typerex-mode))
+(autoload 'typerex-mode "typerex" "Major mode for editing Caml code" t)
+
+;; TypeRex mode configuration
+(setq ocp-server-command "/usr/local/bin/ocp-wizard")
+(setq-default indent-tabs-mode nil)
+
+;; Uncomment to enable typerex command menu by right click
+;;(setq ocp-menu-trigger [mouse-3])
+
+;; Uncomment to make new syntax coloring look almost like Tuareg
+;; (setq ocp-theme "tuareg_like")
+;; Uncomment to disable new syntax coloring and use Tuareg one
+;;(setq ocp-theme "tuareg")
+;; Uncomment to disable syntax coloring completely
+;;(setq ocp-syntax-coloring nil)
+
+;; TypeRex currently uses the Tuareg indentation mechanism. To get a result
+;; closer to the OCaml programming guidelines described at
+;; http://caml.inria.fr/resources/doc/guides/guidelines.en.html
+;; Some users prefer to indent slightly less, as
+;;(setq typerex-let-always-indent nil)
+;;(setq typerex-with-indent 0)
+;;(setq typerex-function-indent 0)
+;;(setq typerex-fun-indent 0)
+;; Another reasonable choice regarding if-then-else is:
+;;(setq typerex-if-then-else-indent 0)
+
+;;;; Auto completion (experimental)
+;;;; Don't use M-x invert-face default with auto-complete! (emacs -r is OK)
+;;(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/auto-complete-mode")
+;;(setq ocp-auto-complete t)
+
+;;;; Using <`> to complete whatever the context, and <C-`> for `
+;;(setq auto-complete-keys 'ac-keys-backquote-backslash)
+;;;; Options: nil (default), 'ac-keys-default-start-with-c-tab, 'ac-keys-two-dollar
+;;;; Note: this overrides individual auto-complete key settings
+
+;;;; I want immediate menu pop-up
+;;(setq ac-auto-show-menu 0.)
+;;;; Short delay before showing help
+;;(setq ac-quick-help-delay 0.3)
+;;;; Number of characters required to start (nil to disable)
+;;(setq ac-auto-start 0)
+
+;;;; Uncomment to enable auto complete mode globally (independently of OCaml)
+;;(require 'auto-complete-config)
+;;(add-to-list 'ac-dictionary-directories "/usr/local/share/emacs/site-lisp/auto-complete-mode/ac-dict")
+;;(ac-config-default)
+
+;; For debugging only
+;;;;(setq ocp-debug t)
+;;;;(setq ocp-profile t)
+;;;;(setq ocp-dont-catch-errors t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; End of TypeRex configuration ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; backup-file
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+;; auto-save-file
+(setq auto-save-file-name-transforms
+      `((".*", temporary-file-directory)))
+
+
+
+
+
