@@ -19,9 +19,9 @@
 (setq frame-title-format "%f")
 
 ;; タブ関連
-(setq-default c-basic-offset 4     
-              tab-width 4          
-              indent-tabs-mode nil)  
+(setq-default c-basic-offset 2
+              tab-width 2
+              indent-tabs-mode nil)
 
 ;; 対応するカッコの強調表示
 (setq show-paren-delay 0)
@@ -91,21 +91,25 @@
   (when (require 'egg nil t)
     (define-key global-map (kbd "C-x v s") 'egg-status)
     (define-key global-map (kbd "C-x v l") 'egg-log)
-    (define-key global-map (kbd "C-x v d") 'egg-diff)
+    (define-key global-map (kbd "C-x v d") 'egg-file-diff)
     ))
 
 
-;;
-;;; org-mode
-;;; http://d.hatena.ne.jp/tamura70/20100203/org
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; org-mode
+;; http://d.hatena.ne.jp/tamura70/20100203/org
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-modeの初期化
 (require 'org-install)
-;; キーバインドの設定
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(define-key global-map "\C-cr" 'org-remember)
 ;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;; キーバインドの設定
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-cc" 'org-capture)
+(define-key global-map "\C-ca" 'org-agenda)
+(define-key global-map "\C-cb" 'org-iswitchb)
+(define-key global-map "\C-cr" 'org-remember)
+
 ;; org-modeでの強調表示を可能にする
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 ;; 見出しの余分な*を消す
@@ -114,10 +118,17 @@
 (setq org-directory "~/org/")
 ;; org-default-notes-fileのファイル名
 (setq org-default-notes-file "notes.org")
-  
+
 (setq org-tag-alist
-  '(("@OFFICE" . ?o) ("@HOME" . ?h) ("SHOPPING" . ?s)
-    ("MAIL" . ?m) ("PROJECT" . ?p)))
+      '(("OFFICE" . ?o)
+        ("COMPUTER" . ?c)        
+        ("HOME" . ?h)
+        ("SHOPPING" . ?s)
+        ("MAIL" . ?m)
+        ("READING" . ?r)
+        ("PROJECT" . ?p)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (when (require 'flymake nil t)
@@ -136,10 +147,16 @@
       (flymake-cc-no-makefile-init)))
   
   (push '("\\.[ch]pp$" flymake-cc-init) flymake-allowed-file-name-masks)
+  (push '("\\.cc$" flymake-cc-init) flymake-allowed-file-name-masks)
   
   (add-hook 'c++-mode-hook
             '(lambda ()
                (flymake-mode t))))
+
+(defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
+  (setq flymake-check-was-interrupted t))
+(ad-activate 'flymake-post-syntax-check)
+
 
 (require 'yasnippet)
 (yas--initialize)
@@ -237,7 +254,15 @@
 (setq auto-save-file-name-transforms
       `((".*", temporary-file-directory)))
 
-
-
-
-
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(flyspell-default-dictionary "american"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
