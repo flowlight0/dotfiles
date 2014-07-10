@@ -1,5 +1,4 @@
-#include <algorithm>
-#include <bitset>
+#include <bits/stdc++.h>
 #include <cassert>
 #include <cctype>
 #include <complex>
@@ -37,10 +36,10 @@ using namespace std;
 typedef long long ll;
  
 class ${ClassName} {
-    public:
-    ${Method.ReturnType} ${Method.Name}(${Method.Params}) {
-        return ${Method.ReturnType;ZeroValue};
-    }
+ public:
+  ${Method.ReturnType} ${Method.Name}(${Method.Params}) {
+    return ${Method.ReturnType;ZeroValue};
+  }
 };
  
 ${CutBegin}
