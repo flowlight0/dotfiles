@@ -54,7 +54,7 @@
 ;; c, c++等のフック
 (add-hook 'c-mode-common-hook
           '(lambda ()
-             (setq tab-width 4)
+             (setq tab-width 2)
              (c-toggle-hungry-state t)
              (c-toggle-electric-state t)
              ))
@@ -66,6 +66,11 @@
 ;; undohistも
 (when (require 'undohist nil t)
   (undohist-initialize))
+
+;; point-undo
+(when (require 'point-undo nil t)
+  (define-key global-map [f7] 'point-undo)
+  (define-key global-map [S-f7] 'point-redo))
 
 ;; auto-completeの設定
 (when (require 'auto-complete-config nil t)
