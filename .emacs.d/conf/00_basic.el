@@ -112,16 +112,6 @@
 (yas-global-mode t)
 (yas/load-directory "~/.emacs.d/snippets")
 
-
-(when (require 'helm-config nil t)
-  ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
-  (helm-mode t)
-  
-  (require 'helm-c-yasnippet)
-  (global-set-key (kbd "C-c y") 'helm-c-yas-complete)
-  )
-
-
 ;; yatex-mode
 
 ;; (setq auto-mode-alist
@@ -149,3 +139,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+(global-git-gutter-mode 1)
