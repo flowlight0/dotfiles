@@ -8,8 +8,7 @@
 (setq frame-title-format "%f")
 
 ;; タブ関連
-(setq-default c-basic-offset 2
-              tab-width 2
+(setq-default tab-width 2
               indent-tabs-mode nil)
 
 ;; 対応するカッコの強調表示
@@ -34,14 +33,6 @@
               (setq eldoc-idle-delay 0.2)
               (setq eldoc-echo-area-use-multiline-p t)
               (turn-on-eldoc-mode))))
-
-;; c, c++等のフック
-(add-hook 'c-mode-common-hook
-          '(lambda ()
-             (setq tab-width 2)
-             (c-toggle-hungry-state t)
-             (c-toggle-electric-state t)
-             ))
 
 ;; undo-treeの設定
 (when (require 'undo-tree nil t)
