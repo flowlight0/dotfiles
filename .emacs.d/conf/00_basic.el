@@ -26,14 +26,6 @@
 (add-hook 'after-save-hook
           'executable-make-buffer-file-executable-if-script-p)
 
-;; emacs-lisp-modeのフック
-(add-hook 'emacs-lisp-mode-hook
-          (lambda ()
-            (when (require 'eldoc nil t)
-              (setq eldoc-idle-delay 0.2)
-              (setq eldoc-echo-area-use-multiline-p t)
-              (turn-on-eldoc-mode))))
-
 ;; undo-treeの設定
 (when (require 'undo-tree nil t)
   (global-undo-tree-mode))
@@ -111,32 +103,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(when (require 'flymake nil t)
-  (defun flymake-cc-no-makefile-init ()
-    (let* ((temp-file   (flymake-init-create-temp-buffer-copy
-                         'flymake-create-temp-inplace))
-           (local-file  (file-relative-name
-                         temp-file
-                         (file-name-directory buffer-file-name))))
-      (message "There is no Makfile")
-      (list "g++" (list "-Wall" "-std=c++11" "-Wextra" "-fsyntax-only" local-file))))
-  
-  (defun flymake-cc-init ()
-    (if (or (file-exists-p "Makefile" ) (file-exists-p "../Makefile"))
-        (flymake-simple-make-init)
-      (flymake-cc-no-makefile-init)))
-  
-  (push '("\\.[ch]pp$" flymake-cc-init) flymake-allowed-file-name-masks)
-  (push '("\\.cc$" flymake-cc-init) flymake-allowed-file-name-masks)
-  
-  (add-hook 'c++-mode-hook
-            '(lambda ()
-               (flymake-mode t))))
-
 (defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
   (setq flymake-check-was-interrupted t))
 (ad-activate 'flymake-post-syntax-check)
-
 
 (require 'yasnippet)
 (yas--initialize)
@@ -159,74 +128,6 @@
 ;;       (cons (cons "\\.tex$" 'yatex-mode) auto-mode-alist))
 ;; (autoload 'yatex-mode "yatex" "Yet Another LaTeX mode" t)
 ;; (setq YaTeX-kanji-code 4)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; TypeRex configuration ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Loading TypeRex mode for OCaml files
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
-(add-to-list 'auto-mode-alist '("\\.ml[iylp]?" . typerex-mode))
-(add-to-list 'interpreter-mode-alist '("ocamlrun" . typerex-mode))
-(add-to-list 'interpreter-mode-alist '("ocaml" . typerex-mode))
-(autoload 'typerex-mode "typerex" "Major mode for editing Caml code" t)
-
-;; TypeRex mode configuration
-(setq ocp-server-command "/usr/local/bin/ocp-wizard")
-(setq-default indent-tabs-mode nil)
-
-;; Uncomment to enable typerex command menu by right click
-;;(setq ocp-menu-trigger [mouse-3])
-
-;; Uncomment to make new syntax coloring look almost like Tuareg
-;; (setq ocp-theme "tuareg_like")
-;; Uncomment to disable new syntax coloring and use Tuareg one
-;;(setq ocp-theme "tuareg")
-;; Uncomment to disable syntax coloring completely
-;;(setq ocp-syntax-coloring nil)
-
-;; TypeRex currently uses the Tuareg indentation mechanism. To get a result
-;; closer to the OCaml programming guidelines described at
-;; http://caml.inria.fr/resources/doc/guides/guidelines.en.html
-;; Some users prefer to indent slightly less, as
-;;(setq typerex-let-always-indent nil)
-;;(setq typerex-with-indent 0)
-;;(setq typerex-function-indent 0)
-;;(setq typerex-fun-indent 0)
-;; Another reasonable choice regarding if-then-else is:
-;;(setq typerex-if-then-else-indent 0)
-
-;;;; Auto completion (experimental)
-;;;; Don't use M-x invert-face default with auto-complete! (emacs -r is OK)
-;;(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/auto-complete-mode")
-;;(setq ocp-auto-complete t)
-
-;;;; Using <`> to complete whatever the context, and <C-`> for `
-;;(setq auto-complete-keys 'ac-keys-backquote-backslash)
-;;;; Options: nil (default), 'ac-keys-default-start-with-c-tab, 'ac-keys-two-dollar
-;;;; Note: this overrides individual auto-complete key settings
-
-;;;; I want immediate menu pop-up
-;;(setq ac-auto-show-menu 0.)
-;;;; Short delay before showing help
-;;(setq ac-quick-help-delay 0.3)
-;;;; Number of characters required to start (nil to disable)
-;;(setq ac-auto-start 0)
-
-;;;; Uncomment to enable auto complete mode globally (independently of OCaml)
-;;(require 'auto-complete-config)
-;;(add-to-list 'ac-dictionary-directories "/usr/local/share/emacs/site-lisp/auto-complete-mode/ac-dict")
-;;(ac-config-default)
-
-;; For debugging only
-;;;;(setq ocp-debug t)
-;;;;(setq ocp-profile t)
-;;;;(setq ocp-dont-catch-errors t)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; End of TypeRex configuration ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;; backup-file
