@@ -1,3 +1,9 @@
+;; 現在の行をハイライト
+(global-hl-line-mode t)
+
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
 ;; 表示ファイル名が重なった時ディレクトリまで表示する
 (when (require 'uniquify nil t)
   (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
@@ -111,13 +117,6 @@
 (yas--initialize)
 (yas-global-mode t)
 (yas/load-directory "~/.emacs.d/snippets")
-
-;; yatex-mode
-
-;; (setq auto-mode-alist
-;;       (cons (cons "\\.tex$" 'yatex-mode) auto-mode-alist))
-;; (autoload 'yatex-mode "yatex" "Yet Another LaTeX mode" t)
-;; (setq YaTeX-kanji-code 4)
 
 
 ;; backup-file
