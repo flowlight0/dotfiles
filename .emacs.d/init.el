@@ -16,3 +16,5 @@
 '(require 'init-loader)
 (init-loader-load "~/.emacs.d/conf")
 
+'(require 'flycheck)
+'(require 
