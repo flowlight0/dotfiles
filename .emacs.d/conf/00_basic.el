@@ -73,50 +73,9 @@
     ))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; org-mode
-;; http://d.hatena.ne.jp/tamura70/20100203/org
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; org-modeの初期化
-(require 'org-install)
-;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-;; キーバインドの設定
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-cc" 'org-capture)
-(define-key global-map "\C-ca" 'org-agenda)
-(define-key global-map "\C-cb" 'org-iswitchb)
-(define-key global-map "\C-cr" 'org-remember)
-
-;; org-modeでの強調表示を可能にする
-(add-hook 'org-mode-hook 'turn-on-font-lock)
-;; 見出しの余分な*を消す
-(setq org-hide-leading-stars t)
-;; org-default-notes-fileのディレクトリ
-(setq org-directory "~/org/")
-;; org-default-notes-fileのファイル名
-(setq org-default-notes-file "notes.org")
-
-(setq org-tag-alist
-      '(("OFFICE" . ?o)
-        ("COMPUTER" . ?c)        
-        ("HOME" . ?h)
-        ("SHOPPING" . ?s)
-        ("MAIL" . ?m)
-        ("READING" . ?r)
-        ("PROJECT" . ?p)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
 (defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
   (setq flymake-check-was-interrupted t))
 (ad-activate 'flymake-post-syntax-check)
-
-(require 'yasnippet)
-(yas--initialize)
-(yas-global-mode t)
-(yas/load-directory "~/.emacs.d/snippets")
 
 
 ;; backup-file
@@ -126,18 +85,11 @@
 (setq auto-save-file-name-transforms
       `((".*", temporary-file-directory)))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(flyspell-default-dictionary "american"))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
 
 (global-git-gutter-mode 1)
+
+;; 見かけの行でカーソルを移動
+(require 'screen-lines)
+(add-hook 'text-mode-hook 'turn-on-screen-lines-mode)
+
+
