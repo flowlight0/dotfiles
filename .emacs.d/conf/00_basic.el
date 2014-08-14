@@ -3,6 +3,8 @@
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 
 ;; 表示ファイル名が重なった時ディレクトリまで表示する
 (when (require 'uniquify nil t)
@@ -88,3 +90,7 @@
 (add-hook 'text-mode-hook 'turn-on-screen-lines-mode)
 
 
+
+(require 'tempbuf)
+(add-hook 'find-file-hooks 'turn-on-tempbuf-mode)
+(add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)

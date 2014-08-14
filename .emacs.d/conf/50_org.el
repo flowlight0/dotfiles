@@ -31,4 +31,17 @@
         ("READING" . ?r)
         ("PROJECT" . ?p)))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defun gtd ()
+  (interactive)
+  (find-file "~/Dropbox/GTD/mygtd.org")
+  )
+
+;; TODO状態
+(setq org-todo-keywords
+      '((type "TODO(t)" "WAIT(w)" "|" "DONE(d)" "SOMEDAY(s)")))
+;; DONEの時刻を記録
+(setq org-log-done 'time)
