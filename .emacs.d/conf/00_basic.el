@@ -20,6 +20,11 @@
               indent-tabs-mode nil)
 
 ;; 対応するカッコの強調表示
+
+;; (when (require 'color-theme-solarized nil t)
+;;   (color-theme-solarized-dark))
+(when (require 'moe-theme nil t)
+  (moe-dark))
 (setq show-paren-delay 0)
 (show-paren-mode t)
 (setq show-paren-style 'expression)

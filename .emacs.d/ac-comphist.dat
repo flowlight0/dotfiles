@@ -1,4 +1,10 @@
-((("provide" .
+((("color-theme-solarized-dark" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("color-theme-solarized-light" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0])
+  ("color-theme-solarized" .
+   [0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("provide" .
    [1 0 0 0 0 0 0])
   ("c++" .
    [1 0 0])
@@ -87,9 +93,9 @@
   ("sorted_by_degree" .
    [0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 3])
   ("when" .
-   [2 0 0 0])
+   [3 0 0 0])
   ("require" .
-   [2 0 0 0 0 0 0])
+   [3 0 0 0 0 0 0])
   ("point-undo" .
    [1 0 0 0 0 0 0 0 0 0])
   ("REP" .
@@ -129,7 +135,7 @@
   ("c-basic-offset" .
    [0 0 0 0 0 0 0 0 0 0 0 0 1 0])
   ("nil" .
-   [1 0 0])
+   [2 0 0])
   ("use-sticky-key" .
    [0 0 0 0 0 1 0 0 0 0 0 0 0 0])
   ("sticky-alist:ja" .
