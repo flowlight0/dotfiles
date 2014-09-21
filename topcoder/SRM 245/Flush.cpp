@@ -39,10 +39,14 @@ typedef long long ll;
  
 class Flush {
 public:
-    double size(vector<int> suits, int number) {
-        
-        return 0.0;
-    }
+  double size(vector<int> suits, int number) {
+      
+    return 0.0;
+  }
+  
+  void hoge(){
+    
+  }
 };
  
 // CUT begin

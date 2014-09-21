@@ -1,6 +1,7 @@
 ;; 現在の行をハイライト
 (global-hl-line-mode t)
 
+(linum-mode t)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -99,3 +100,9 @@
 (require 'tempbuf)
 (add-hook 'find-file-hooks 'turn-on-tempbuf-mode)
 (add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)
+
+(require 'shell-history)
+(add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
+
+
+(require 'open-junk-file)
