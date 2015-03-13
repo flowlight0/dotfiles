@@ -57,7 +57,10 @@
              (setq tab-width 4)
              (c-toggle-hungry-state t)
              (c-toggle-electric-state t)
-             ))
+             (when (require 'c-eldoc nil t)
+               (set (make-local-variable 'eldoc-idle-delay) 0.20)
+               (c-turn-on-eldoc-mode)
+               )))
 
 ;; undo-treeの設定
 (when (require 'undo-tree nil t)
