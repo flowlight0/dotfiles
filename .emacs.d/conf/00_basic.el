@@ -98,7 +98,9 @@
       `((".*", temporary-file-directory)))
 
 
-(global-git-gutter-mode 1)
+(el-get-bundle git-gutter)
+(when (require 'git-gutter)
+  (global-git-gutter-mode 1))
 
 ;; 見かけの行でカーソルを移動
 (el-get-bundle screen-lines)
