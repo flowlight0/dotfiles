@@ -53,10 +53,10 @@
   (undohist-initialize))
 
 ;; point-undo
-(el-get-bundle point-undo)
-(when (require 'point-undo)
-  (define-key global-map [f7] 'point-undo)
-  (define-key global-map [S-f7] 'point-redo))
+;; (el-get-bundle point-undo)
+;; (when (require 'point-undo)
+;;   (define-key global-map [f7] 'point-undo)
+;;   (define-key global-map [S-f7] 'point-redo))
 
 ;; auto-completeの設定
 (el-get-bundle auto-complete)
@@ -103,9 +103,9 @@
   (global-git-gutter-mode 1))
 
 ;; 見かけの行でカーソルを移動
-(el-get-bundle screen-lines)
-(when (require 'screen-lines)
-  (add-hook 'text-mode-hook 'turn-on-screen-lines-mode))q
+;; (el-get-bundle screen-lines)
+;; (when (require 'screen-lines)
+;;   (add-hook 'text-mode-hook 'turn-on-screen-lines-mode))
 
 
 (el-get-bundle tempbuf)
@@ -113,9 +113,9 @@
   (add-hook 'find-file-hooks 'turn-on-tempbuf-mode)
   (add-hook 'dired-mode-hook 'turn-on-tempbuf-mode))
 
-(el-get-bundle shell-history)
-(when (require 'shell-history)
-  (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt))
+;; (el-get-bundle shell-history)
+;; (when (require 'shell-history)
+;;   (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt))
 
 (el-get-bundle open-junk-file)
 (require 'open-junk-file)

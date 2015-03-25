@@ -1,5 +1,5 @@
 (el-get-bundle fold-dwim)
-(el-get-bundle hideshow)
+;; (el-get-bundle hideshow)
 ;; (el-get-bundle hs-mode)
 ;; (when (require 'fold-dwim)
 ;;   (require 'hideshow nil t)
@@ -14,4 +14,3 @@
 ;;                c-mode-common-hook
 ;;                python-mode-hook))
 ;;       (add-hook hook 'hs-minor-mode))))
-
