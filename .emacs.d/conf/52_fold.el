@@ -1,4 +1,6 @@
-(when (require 'fold-dwim nil t)
+(el-get-bundle fold-dwim)
+(el-get-bundle hideshow)
+(when (require 'fold-dwim)
   (require 'hideshow nil t)
   
   (define-key global-map (kbd "C-,") 'fold-dwim-toggle)

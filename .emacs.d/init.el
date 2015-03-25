@@ -1,23 +1,14 @@
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
+(when load-file-name
+  (setq user-emacs-directory (file-name-directory load-file-name)))
 
-;; package.el
-(when (require 'package nil t)
-  (add-to-list 'package-archives
-               '("marmalade" . "http://marmalade-repo.org/packages/"))
-  (add-to-list 'package-archives
-               '("melpa" . "http://melpa.milkbox.net/packages/"))
-  (add-to-list 'package-archives
-               '("ELPA" . "http://tromey.com/elpa/"))
-  (package-initialize))
+(add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
 
-'(require 'init-loader)
+(el-get-bundle init-loader)
+(require 'init-loader)
 (init-loader-load "~/.emacs.d/conf")
-
-
-(require 'cask)
-(cask-initialize)
-(require 'pallet)
-

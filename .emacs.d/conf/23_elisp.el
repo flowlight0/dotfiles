@@ -1,4 +1,5 @@
 ;; emacs-lisp-modeのフック
+(el-get-bundle eldoc-extension)
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
             (when (require 'eldoc nil t)

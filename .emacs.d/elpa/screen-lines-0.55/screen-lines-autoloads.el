@@ -4,8 +4,8 @@
 
 
 ;;;### (autoloads (turn-off-screen-lines-mode turn-on-screen-lines-mode
-;;;;;;  screen-lines-mode) "screen-lines" "screen-lines.el" (21477
-;;;;;;  5601 665142 914000))
+;;;;;;  screen-lines-mode) "screen-lines" "screen-lines.el" (21778
+;;;;;;  56317 688678 806000))
 ;;; Generated autoloads from screen-lines.el
 
 (autoload 'screen-lines-mode "screen-lines" "\
@@ -26,8 +26,8 @@ Turn off Screen Lines minor mode for the current buffer.
 
 ;;;***
 
-;;;### (autoloads nil nil ("screen-lines-pkg.el") (21477 5601 794039
-;;;;;;  933000))
+;;;### (autoloads nil nil ("screen-lines-pkg.el") (21778 56317 751797
+;;;;;;  959000))
 
 ;;;***
 

@@ -3,6 +3,7 @@
 ;; http://d.hatena.ne.jp/tamura70/20100203/org
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-modeの初期化
+(el-get-bundle org-mode)
 (require 'org-install)
 ;; 拡張子がorgのファイルを開いた時，自動的にorg-modeにする
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
