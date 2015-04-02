@@ -1,7 +1,9 @@
+;; (load-file "../elisp/graphviz-dot-mode.el") 
+;; (add-to-list 'auto-mode-alist '("\\.org$" . graphiz-dot-mode))
+
 ;; 現在の行をハイライト
 (global-hl-line-mode t)
 
-(linum-mode t)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -17,7 +19,7 @@
 (setq frame-title-format "%f")
 
 ;; タブ関連
-(setq-default tab-width 2
+(setq-default tab-width 4
               indent-tabs-mode nil)
 
 ;; 対応するカッコの強調表示
@@ -106,3 +108,8 @@
 
 
 (require 'open-junk-file)
+
+(when (require 'sr-speedbar nil t)
+  (setq sr-speedbar-right-side nil))
+(setq sr-speedbar-right-side nil)
+(setq sr-speedbar-skip-other-window-p nil)

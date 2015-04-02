@@ -1,3 +1,6 @@
+(require 'helm)
+(require 'helm-gtags)
+
 (when (require 'helm-config nil t)
   ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (helm-mode t)

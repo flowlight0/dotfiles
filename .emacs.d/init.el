@@ -17,5 +17,6 @@
 (init-loader-load "~/.emacs.d/conf")
 
 (require 'cask)
-(cask-initialize)
 (require 'pallet)
+
+(cask-initialize)
