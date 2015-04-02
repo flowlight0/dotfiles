@@ -119,15 +119,3 @@
 ;; (when (require 'shell-history)
 ;;   (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt))
 
-(el-get-bundle open-junk-file)
-(require 'open-junk-file)
-<<<<<<< HEAD
-
-(when (require 'sr-speedbar nil t)
-  (setq sr-speedbar-right-side nil))
-(setq sr-speedbar-right-side nil)
-(setq sr-speedbar-skip-other-window-p nil)
-=======
-;; (when (require 'open-junk-file nil t)
-;;   ())                                   ;
->>>>>>> db536122146874807653881dacc636c937e71256
