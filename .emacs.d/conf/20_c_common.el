@@ -1,4 +1,5 @@
 ;; c, c++等のフック
+(el-get-bundle c-eldoc)
 (add-hook 'c-mode-common-hook
           '(lambda ()
              (setq tab-width 2)

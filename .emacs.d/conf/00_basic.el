@@ -10,7 +10,7 @@
 
 
 ;; 表示ファイル名が重なった時ディレクトリまで表示する
-(when (require 'uniquify nil t)
+(when (require 'uniquify)
   (setq uniquify-buffer-name-style 'post-forward-angle-brackets))
 
 ;; カラム番号を表示
@@ -26,7 +26,9 @@
 
 ;; (when (require 'color-theme-solarized nil t)
 ;;   (color-theme-solarized-dark))
-(when (require 'moe-theme nil t)
+
+(el-get-bundle moe-theme)
+(when (require 'moe-theme)
   (moe-dark))
 (setq show-paren-delay 0)
 (show-paren-mode t)
@@ -43,20 +45,26 @@
           'executable-make-buffer-file-executable-if-script-p)
 
 ;; undo-treeの設定
-(when (require 'undo-tree nil t)
+(el-get-bundle undo-tree)
+(when (require 'undo-tree)
   (global-undo-tree-mode))
 
 ;; undohistも
+(el-get-bundle undohist)
 (when (require 'undohist nil t)
   (undohist-initialize))
 
 ;; point-undo
-(when (require 'point-undo nil t)
-  (define-key global-map [f7] 'point-undo)
-  (define-key global-map [S-f7] 'point-redo))
+;; (el-get-bundle point-undo)
+;; (when (require 'point-undo)
+;;   (define-key global-map [f7] 'point-undo)
+;;   (define-key global-map [S-f7] 'point-redo))
 
 ;; auto-completeの設定
-(when (require 'auto-complete-config nil t)
+(el-get-bundle auto-complete)
+(el-get-bundle auto-complete+)
+(el-get-bundle auto-complete-c-headers)
+(when (require 'auto-complete-config)
   (add-to-list 'ac-dictionary-directories
                "~/.emacs.d/elisp/ac-dict")
   (ac-config-default))
@@ -75,8 +83,9 @@
 
 
 ;; eggの設定
+(el-get-bundle egg)
 (when (executable-find "git")
-  (when (require 'egg nil t)
+  (when (require 'egg)
     (define-key global-map (kbd "C-x v s") 'egg-status)
     (define-key global-map (kbd "C-x v l") 'egg-log)
     (define-key global-map (kbd "C-x v d") 'egg-file-diff)
@@ -91,25 +100,34 @@
       `((".*", temporary-file-directory)))
 
 
-(global-git-gutter-mode 1)
+(el-get-bundle git-gutter)
+(when (require 'git-gutter)
+  (global-git-gutter-mode 1))
 
 ;; 見かけの行でカーソルを移動
-(require 'screen-lines)
-(add-hook 'text-mode-hook 'turn-on-screen-lines-mode)
+;; (el-get-bundle screen-lines)
+;; (when (require 'screen-lines)
+;;   (add-hook 'text-mode-hook 'turn-on-screen-lines-mode))
 
 
+(el-get-bundle tempbuf)
+(when (require 'tempbuf)
+  (add-hook 'find-file-hooks 'turn-on-tempbuf-mode)
+  (add-hook 'dired-mode-hook 'turn-on-tempbuf-mode))
 
-(require 'tempbuf)
-(add-hook 'find-file-hooks 'turn-on-tempbuf-mode)
-(add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)
+;; (el-get-bundle shell-history)
+;; (when (require 'shell-history)
+;;   (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt))
 
-(require 'shell-history)
-(add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
-
-
+(el-get-bundle open-junk-file)
 (require 'open-junk-file)
+<<<<<<< HEAD
 
 (when (require 'sr-speedbar nil t)
   (setq sr-speedbar-right-side nil))
 (setq sr-speedbar-right-side nil)
 (setq sr-speedbar-skip-other-window-p nil)
+=======
+;; (when (require 'open-junk-file nil t)
+;;   ())                                   ;
+>>>>>>> db536122146874807653881dacc636c937e71256
