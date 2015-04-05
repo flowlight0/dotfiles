@@ -1,7 +1,7 @@
 ;; 現在の行をハイライト
 (global-hl-line-mode t)
 
-(linum-mode t)
+(global-linum-mode)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -119,5 +119,34 @@
 
 (el-get-bundle open-junk-file)
 (require 'open-junk-file)
-;; (when (require 'open-junk-file nil t)
-;;   ())                                   ;
+
+(el-get-bundle elscreen)
+(when (require 'elscreen)
+  ;;; プレフィクスキーはC-z
+  (setq elscreen-prefix-key (kbd "C-z"))
+  (elscreen-start)
+;;; タブの先頭に[X]を表示しない
+  (setq elscreen-tab-display-kill-screen nil)
+;;; header-lineの先頭に[<->]を表示しない
+  (setq elscreen-tab-display-control nil)
+;;; バッファ名・モード名からタブに表示させる内容を決定する(デフォルト設定)
+  (setq elscreen-buffer-to-nickname-alist
+        '(("^dired-mode$" .
+           (lambda ()
+             (format "Dired(%s)" dired-directory)))
+          ("^Info-mode$" .
+           (lambda ()
+             (format "Info(%s)" (file-name-nondirectory Info-current-file))))
+          ("^mew-draft-mode$" .
+           (lambda ()
+             (format "Mew(%s)" (buffer-name (current-buffer)))))
+          ("^mew-" . "Mew")
+          ("^irchat-" . "IRChat")
+          ("^liece-" . "Liece")
+          ("^lookup-" . "Lookup")))
+  (setq elscreen-mode-to-nickname-alist
+        '(("[Ss]hell" . "shell")
+          ("compilation" . "compile")
+          ("-telnet" . "telnet")
+          ("dict" . "OnlineDict")
+          ("*WL:Message*" . "Wanderlust"))))

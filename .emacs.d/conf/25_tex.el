@@ -1,3 +1,9 @@
+(el-get-bundle mercurial)
+(setq auto-mode-alist (cons '("\\.tex$" . tex-mode) auto-mode-alist))
+(add-hook ' tex-mode-hook
+            '(lambda () (auto-fill-mode t))
+)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
