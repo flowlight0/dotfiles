@@ -12,3 +12,11 @@
 (el-get-bundle init-loader)
 (require 'init-loader)
 (init-loader-load "~/.emacs.d/conf")
+<<<<<<< HEAD
+
+(require 'cask)
+(require 'pallet)
+
+(cask-initialize)
+=======
+>>>>>>> db536122146874807653881dacc636c937e71256

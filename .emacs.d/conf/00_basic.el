@@ -1,7 +1,12 @@
+;; (load-file "../elisp/graphviz-dot-mode.el") 
+;; (add-to-list 'auto-mode-alist '("\\.org$" . graphiz-dot-mode))
+
 ;; 現在の行をハイライト
 (global-hl-line-mode t)
 
-(global-linum-mode)
+;; <<<<<<< HEAD
+;; (global-linum-mode)
+;; =======
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -17,7 +22,7 @@
 (setq frame-title-format "%f")
 
 ;; タブ関連
-(setq-default tab-width 2
+(setq-default tab-width 4
               indent-tabs-mode nil)
 
 ;; 対応するカッコの強調表示
@@ -117,8 +122,9 @@
 ;; (when (require 'shell-history)
 ;;   (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt))
 
-(el-get-bundle open-junk-file)
-(require 'open-junk-file)
+;; <<<<<<< HEAD
+;; (el-get-bundle open-junk-file)
+;; (require 'open-junk-file)
 
 (el-get-bundle elscreen)
 (when (require 'elscreen)
