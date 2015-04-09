@@ -1,5 +1,9 @@
-(el-get-bundle flycheck)
-(el-get-bundle flycheck-pos-tip)
+(el-get-bundle dash)
+(el-get-bundle pkg-info)
+(el-get-bundle let-alist)
+(el-get-bundle cl-lib)
+(el-get-bundle flycheck/flycheck)
+(el-get-bundle flycheck/flycheck-pos-tip)
 
 (when (require 'flycheck)
   (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -10,7 +14,7 @@
     '(custom-set-variables
       '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
   (setq flycheck-clang-language-standard "c++11"))
-;; (define-key flycheck-mode-map (kbd "C-x c") 'list-flycheck-errors)
+(define-key flycheck-mode-map (kbd "C-x c") 'list-flycheck-errors)
 
 
 ;; (eval-after-load 'flycheck
