@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ;; ;; migemoの記述
 ;; ;; http://nya-0.hatenablog.com/entry/2014/06/07/190016 よりコピペ
 ;; (require 'migemo)
