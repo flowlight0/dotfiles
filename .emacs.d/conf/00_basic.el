@@ -31,8 +31,8 @@
 ;;   (color-theme-solarized-dark))
 
 (el-get-bundle moe-theme)
-(when (require 'moe-theme)
-  (moe-dark))
+;; (when (require 'moe-theme)
+;;   (moe-dark))
 (setq show-paren-delay 0)
 (show-paren-mode t)
 (setq show-paren-style 'expression)
