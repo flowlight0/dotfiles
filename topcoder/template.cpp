@@ -34,6 +34,21 @@ using namespace std;
 #define BIT(n, m) (((n) >> (m)) & 1)
 
 typedef long long ll;
+
+template <typename S, typename T> ostream &operator<<(ostream &out, const pair<S, T> &p) {
+  out << "(" << p.first << ", " << p.second << ")";
+  return out;
+}
+
+template <typename T> ostream &operator<<(ostream &out, const vector<T> &v) {
+  out << "[";
+  REP(i, v.size()){
+    if (i > 0) out << ", ";
+    out << v[i];
+  }
+  out << "]";
+  return out;
+}
  
 class ${ClassName} {
  public:
