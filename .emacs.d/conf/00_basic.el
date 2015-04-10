@@ -122,7 +122,6 @@
 ;; (when (require 'shell-history)
 ;;   (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt))
 
-;; <<<<<<< HEAD
 ;; (el-get-bundle open-junk-file)
 ;; (require 'open-junk-file)
 
@@ -156,3 +155,6 @@
           ("-telnet" . "telnet")
           ("dict" . "OnlineDict")
           ("*WL:Message*" . "Wanderlust"))))
+
+
+
