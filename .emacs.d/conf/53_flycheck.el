@@ -12,7 +12,8 @@
   (eval-after-load 'flycheck
     '(custom-set-variables
       '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
-  (setq flycheck-clang-language-standard "c++11"))
+  (setq-default flycheck-clang-language-standard "c++11"
+                flycheck-gcc-language-standard "c++11"))
 (define-key flycheck-mode-map (kbd "C-x c") 'list-flycheck-errors)
 
 
