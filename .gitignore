@@ -1,6 +1,10 @@
 #*#
 *~
-
+topcoder/Single*
+topcoder/SRM*
 !/.emacs.d/*
 !/.emacs.d/init.el
 !/.emacs.d/conf
+
+.emacs.d/session.*
+
