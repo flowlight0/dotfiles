@@ -9,6 +9,7 @@
     (goto-char (point-max))
     (eval-print-last-sexp)))
 
+(el-get 'sync)
 (el-get-bundle init-loader)
 (require 'init-loader)
 (init-loader-load "~/.emacs.d/conf")
