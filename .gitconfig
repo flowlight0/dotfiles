@@ -1,3 +1,5 @@
+# Forked from https://gist.github.com/tdd/470582
+
 # Put this in your ~/.gitconfig or ~/.config/git/config
 # Windows users: "~" is your profile's home directory, e.g. C:\Users\<YourName>
 [user]
