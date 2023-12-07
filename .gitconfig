@@ -158,3 +158,6 @@
   prereleaseSuffix = .beta
   prereleaseSuffix = -rc
   prereleaseSuffix = .rc
+[pager]
+	diff = less -FX
+	log = less -FX
