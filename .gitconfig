@@ -143,8 +143,8 @@
 [status]
   # Display submodule rev change summaries in status
   submoduleSummary = true
-  # Recursively traverse untracked directories to display all contents
-  showUntrackedFiles = all
+  # # Recursively traverse untracked directories to display all contents
+  # showUntrackedFiles = all
 [color "branch"]
   # Blue on black is hard to read in git branch -vv: use cyan instead
   upstream = cyan
