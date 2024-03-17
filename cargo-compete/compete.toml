@@ -22,13 +22,53 @@ test-suite = "{{ manifest_dir }}/testcases/{{ bin_alias }}.yml"
 
 [template]
 src = '''
-use proconio::input;
+#[allow(unused_imports)]
+use proconio::{input, marker::Chars};
+
+#[allow(unused_imports)]
+use library::*;
+
 
 fn main() {
     input! {
         
     };
 }
+
+ 
+ mod library {
+    
+    #[macro_export]
+    macro_rules! mat {
+        ($($e:expr),*) => { Vec::from(vec![$($e),*]) };
+        ($($e:expr,)*) => { Vec::from(vec![$($e),*]) };
+        ($e:expr; $d:expr) => { Vec::from(vec![$e; $d]) };
+        ($e:expr; $d:expr $(; $ds:expr)+) => { Vec::from(vec![mat![$e $(; $ds)*]; $d]) };
+    }
+
+    pub trait SetMinMax {
+        fn set_min(&mut self, v: Self) -> bool;
+        fn set_max(&mut self, v: Self) -> bool;
+    }
+
+    impl<T> SetMinMax for T
+    where
+        T: PartialOrd,
+    {
+        fn set_min(&mut self, v: T) -> bool {
+            *self > v && {
+                *self = v;
+                true
+            }
+        }
+        fn set_max(&mut self, v: T) -> bool {
+            *self < v && {
+                *self = v;
+                true
+            }
+        }
+    }
+ }
 '''
 
 [template.new]
