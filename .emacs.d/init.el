@@ -16,7 +16,12 @@
   (setenv value-var "git://github.com/")
   (setenv "GIT_CONFIG_COUNT" (number-to-string (1+ count))))
 
-(setq el-get-github-default-url-type 'https)
+(setq el-get-github-default-url-type 'https
+      el-get-git-install-url "https://github.com/dimitri/el-get.git"
+      ;; el-get の bootstrap 後に Emacswiki レシピを取りに行くと、
+      ;; 環境によっては HTTP 402 で "Somebody wants you to give them money"
+      ;; になり起動が止まるため、bootstrap 時の取得を抑止する。
+      el-get-install-skip-emacswiki-recipes t)
 (add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
@@ -25,7 +30,8 @@
     (goto-char (point-max))
     (eval-print-last-sexp)))
 
-(setq el-get-github-default-url-type 'https)
+(setq el-get-github-default-url-type 'https
+      el-get-install-skip-emacswiki-recipes t)
 (el-get 'sync)
 (el-get-bundle init-loader)
 (require 'init-loader)
