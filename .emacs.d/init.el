@@ -33,6 +33,9 @@
 (setq el-get-github-default-url-type 'https
       el-get-install-skip-emacswiki-recipes t)
 (el-get 'sync)
-(el-get-bundle init-loader)
+;; el-get-bundle in current el-get can fail while macro-expanding a plain
+;; package name (wrong-type-argument plistp "init-loader").  init-loader has
+;; an el-get recipe, so install it directly instead of going through the macro.
+(el-get 'sync 'init-loader)
 (require 'init-loader)
 (init-loader-load (locate-user-emacs-file "conf"))
