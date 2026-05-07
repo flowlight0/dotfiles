@@ -40,6 +40,16 @@
 (set-face-underline-p 'show-paren-match-face "blue")
 
 (keyboard-translate ?\C-h ?\C-?) ;; C-hをバックスペースに
+
+;; macOS では Option-x が「≈」として Emacs に届くことがあるため、
+;; GUI 版では Option を Meta として扱い、文字として届いた場合も M-x に変換する。
+(when (eq system-type 'darwin)
+  (when (boundp 'mac-option-modifier)
+    (setq mac-option-modifier 'meta))
+  (when (boundp 'ns-option-modifier)
+    (setq ns-option-modifier 'meta))
+  (define-key key-translation-map (kbd "≈") (kbd "M-x")))
+
 (setq kill-whole-line t)         ;; C-kで行全体を削除
 (define-key global-map (kbd "C-t") 'other-window) ;; "C-t"でウィンドウ切り替え
 
