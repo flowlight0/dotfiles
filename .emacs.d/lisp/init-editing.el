@@ -21,9 +21,9 @@
 (setq backup-directory-alist `(("." . ,(locate-user-emacs-file "var/backups/"))))
 (setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "var/auto-save/") t)))
 (setq auto-save-list-file-prefix (locate-user-emacs-file "var/auto-save-list/.saves-"))
-(create-directory (locate-user-emacs-file "var/backups/") t)
-(create-directory (locate-user-emacs-file "var/auto-save/") t)
-(create-directory (locate-user-emacs-file "var/auto-save-list/") t)
+(make-directory (locate-user-emacs-file "var/backups/") t)
+(make-directory (locate-user-emacs-file "var/auto-save/") t)
+(make-directory (locate-user-emacs-file "var/auto-save-list/") t)
 
 (use-package yasnippet
   :defer 1
