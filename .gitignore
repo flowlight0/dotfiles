@@ -2,9 +2,14 @@
 *~
 topcoder/Single*
 topcoder/SRM*
-!/.emacs.d/*
-!/.emacs.d/init.el
-!/.emacs.d/conf
 
+# Emacs runtime state and installed packages are machine-local.
+.emacs.d/auto-save-list/
+.emacs.d/custom.el
+.emacs.d/elpa/
+.emacs.d/eln-cache/
+.emacs.d/places
+.emacs.d/recentf
 .emacs.d/session.*
-.emacs.d/elpa/archives/gnu/archive-contents
+.emacs.d/transient/
+.emacs.d/var/
